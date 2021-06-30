@@ -33,6 +33,8 @@ def get_latest_local_cases(data):
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             localCases = description[description.index("verified"):description.index("locally transmitted")]
             localCases = "".join(char for char in localCases if char in "1234567890")
+            if len(localCases) == 0:
+                localCases = 0
             break
     return (date, int(localCases))
 
@@ -53,6 +55,8 @@ def get_previous_data(data):
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             localCases = description[description.index("verified"):description.index("locally transmitted")]
             localCases = "".join(char for char in localCases if char in "1234567890")
+            if len(localCases) == 0:
+                localCases = 0
             dailyLocalCases[date] = int(localCases)
 
 def load():

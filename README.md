@@ -4,7 +4,7 @@ This repository aims to provide machine readable SG COVID Data. Currently there 
 
 This repository contains the following data
 
-1. [Locally Transmitted Cases](SG-COVIDdata/data/dailyLocalCases.json)
+1. [Locally Transmitted Cases](data/dailyLocalCases.json)
 
 
 # Data Source
