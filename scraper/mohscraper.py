@@ -56,12 +56,12 @@ def get_previous_data(data):
             dailyLocalCases[date] = int(localCases)
 
 def load():
-    with open("SG-COVIDdata/data/dailyLocalCases.json") as file:
+    with open("../data/dailyLocalCases.json") as file:
         dailyLocalCases = json.load(file)
     return dailyLocalCases
 
 def unload(dailyLocalCases):
-    with open("SG-COVIDdata/data/dailyLocalCases.json", "w") as file:
+    with open("../data/dailyLocalCases.json", "w") as file:
         json.dump(dailyLocalCases, file, indent=4)
 
 
