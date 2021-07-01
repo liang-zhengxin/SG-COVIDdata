@@ -59,23 +59,54 @@ def get_previous_data(data):
                 localCases = 0
             dailyLocalCases[date] = int(localCases)
 
+def get_latest_vax(data):
+    for news in data:
+        title = news['title']
+        if all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
+            description = news["description"]
+            soup = BeautifulSoup(description, "html.parser")
+            description = soup.get_text()
+            
+            vaccineData = description[description.index("Progress of national vaccination programme"):description.index("full vaccination regimen.")]
+            date = vaccineData[vaccineData.index("As"):]
+            date = date[6:date.index("we")-2]
+            date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
+            total = vaccineData[vaccineData.index("total number of doses administered"):vaccineData.index("covering")]
+            first = vaccineData[vaccineData.index("covering"):vaccineData.index("individuals")]
+            completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("second dose")]
+            total = "".join(char for char in total if char in "1234567890")
+            first = "".join(char for char in first if char in "1234567890")
+            completed = "".join(char for char in completed if char in "1234567890")
+            entry = {"total":int(total), "first":int(first), "completed":int(completed)}
+            break
+    return date , entry
+
 def load():
     with open("../data/dailyLocalCases.json") as file:
         dailyLocalCases = json.load(file)
-    return dailyLocalCases
 
-def unload(dailyLocalCases):
+    with open("../data/dailyVaxData.json") as file:
+        dailyVaxData = json.load(file)
+    return dailyLocalCases , dailyVaxData
+
+def unload(dailyLocalCases, dailyVaxData):
     with open("../data/dailyLocalCases.json", "w") as file:
         json.dump(dailyLocalCases, file, indent=4)
+    
+    with open("../data/dailyVaxData.json", "w") as file:
+        json.dump(dailyVaxData, file, indent=4)
 
 
 ### RUN EVERYTIME ###
 data = get_MOH_feed()
-dailyLocalCases = load()
+dailyLocalCases, dailyVaxData = load()
 
 ### RUN DAILY ###
 date, localCases = get_latest_local_cases(data)
 dailyLocalCases[date] = localCases
+
+date , entry = get_latest_vax(data)
+dailyVaxData[date] = entry
 
 ### RUN ONCE TO GET ALL DATA ###
 #get_previous_data(data)
@@ -86,4 +117,4 @@ dailyLocalCases[date] = localCases
 dailyLocalCases = sorted(list(dailyLocalCases.items()), key=lambda x:datetime.datetime.strptime(x[0],"%d-%m-%Y"), reverse=True)
 dailyLocalCases = dict(dailyLocalCases)
 
-unload(dailyLocalCases)
+unload(dailyLocalCases, dailyVaxData)
