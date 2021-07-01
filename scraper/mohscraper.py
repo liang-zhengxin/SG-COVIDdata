@@ -81,4 +81,9 @@ dailyLocalCases[date] = localCases
 #get_previous_data(data)
 
 ### RUN EVERYTIME ###
+# SORT DATA SUCH THAT LATEST ON TOP
+# Not the best method when data size inceases as at least O(n^2)
+dailyLocalCases = sorted(list(dailyLocalCases.items()), key=lambda x:datetime.datetime.strptime(x[0],"%d-%m-%Y"), reverse=True)
+dailyLocalCases = dict(dailyLocalCases)
+
 unload(dailyLocalCases)
