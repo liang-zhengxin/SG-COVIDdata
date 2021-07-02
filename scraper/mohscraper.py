@@ -117,4 +117,7 @@ dailyVaxData[date] = entry
 dailyLocalCases = sorted(list(dailyLocalCases.items()), key=lambda x:datetime.datetime.strptime(x[0],"%d-%m-%Y"), reverse=True)
 dailyLocalCases = dict(dailyLocalCases)
 
+dailyVaxData = sorted(list(dailyVaxData.items()), key=lambda x:datetime.datetime.strptime(x[0],"%d-%m-%Y"), reverse=True)
+dailyVaxData = dict(dailyVaxData)
+
 unload(dailyLocalCases, dailyVaxData)
