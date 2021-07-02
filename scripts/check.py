@@ -13,7 +13,7 @@ END_DATE = datetime.datetime(2021,6,1)
 
 # Load Data Function
 def load():
-    with open("SG-COVIDdata/data/pre1jun21.json") as file:
+    with open("SG-COVIDdata/data/dailyLocalCases-pre1jun21.json") as file:
         dailyLocalCases = json.load(file)
     return dailyLocalCases
 

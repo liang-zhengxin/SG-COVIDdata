@@ -18,12 +18,12 @@ DATA = {}
 
 # Getters and Setters
 def load():
-    with open("SG-COVIDdata/data/pre1jun21.json") as file:
+    with open("SG-COVIDdata/data/dailyLocalCases-pre1jun21.json") as file:
         dailyLocalCases = json.load(file)
     return dailyLocalCases
 
 def unload(dailyLocalCases):
-    with open("SG-COVIDdata/data/pre1jun21.json", "w") as file:
+    with open("SG-COVIDdata/data/dailyLocalCases-pre1jun21.json", "w") as file:
         json.dump(dailyLocalCases, file, indent=4)
 
 def get_press_release(date):

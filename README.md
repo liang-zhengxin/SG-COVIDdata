@@ -6,7 +6,7 @@ This repository contains the following data:
 
 1. [Locally Transmitted Cases](data/dailyLocalCases.json) (1 June 2021 onwards)
 
-2. [Locally Transmitted Cases](data/pre1jun21.json) (5 October 2020 to 30 May 2021)
+2. [Locally Transmitted Cases](data/dailyLocalCases-pre1jun21.json) (5 October 2020 to 30 May 2021)
 
 3. [Vaccination](data/dailyVaxData.json) (28 June 2021 onwards)
 
@@ -23,7 +23,7 @@ This repository contains the following data:
 
 2. [COVID-19-SG GitHub Repository](https://github.com/alphamodel/COVID-19-SG) (Archived Press Release)
 
-    * [Locally Transmitted Cases](data/pre1jun21.json) (5 October 2020 to 30 May 2021)
+    * [Locally Transmitted Cases](data/dailyLocalCases-pre1jun21.json) (5 October 2020 to 30 May 2021)
 
 
 
