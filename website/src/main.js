@@ -1,10 +1,10 @@
 const input = document.getElementById('value');
 const progressValue = document.querySelector('.Progressbar__value');
-const progress = document.querySelector('progress');
+const percent = document.querySelector('.percent');
 
 function setValue(value) {
   progressValue.style.width = `${value}%`;
-  progress.value = value;
+  percent.textContent = String(Math.round(value)) + "%"
 }
 
 const latestData = {
@@ -20,10 +20,10 @@ const latestData = {
   }
 };
 
-fetch("https://liang-zhengxin.github.io/SG-COVIDdata/api/latest.json")
-  .then(response => response.json())
-  .then(data=> {getValue(data)});
-
+// fetch("../api/latest.json")
+//  .then(response => response.json())
+//  .then(data=> {getValue(data)});
+getValue(latestData)
 function getValue(latestData) {
   const pop = 5685800
   const t = Object.keys(latestData.dailyVaxData)
