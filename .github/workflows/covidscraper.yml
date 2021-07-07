@@ -35,7 +35,7 @@ jobs:
         
       - name: commit files
         run: |
-          git config --local user.email <>
+          git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           git add -A
           git commit -m "daily update data"
