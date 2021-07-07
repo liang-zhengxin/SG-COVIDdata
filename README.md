@@ -1,4 +1,5 @@
 # SG-COVIDdata
+[![COVID Data Scraper](https://github.com/liang-zhengxin/SG-COVIDdata/actions/workflows/covidscraper.yml/badge.svg?branch=main)](https://github.com/liang-zhengxin/SG-COVIDdata/actions/workflows/covidscraper.yml)
 
 This repository aims to provide machine readable SG COVID Data. Currently there isn't any repository i can find on GitHub the gives me the daily Locally Transmitted Cases in Singapore
 
