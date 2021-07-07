@@ -12,14 +12,14 @@ body {
 
 .Progressbar {
   position: relative;
-  height: 32px;
+  height: 5vh;
   border-radius: 1000px;
   background-color: #484848;
   clip-path: inset(0 0 0 0 round 1000px);
 }
 
 .Progressbar__value {
-  height: 32px;
+  height: 5vh;
   transition: width 0.4s ease-in-out;
   border-radius: 1000px 0 0 1000px;
   background-color: #ff4c65;
@@ -31,12 +31,22 @@ body {
   left: 50%;
   top: 20%;
   bottom: 20%;
+  font-size:3vh;
   font-family: "Times New Roman";
 }
 
 .milestone {
   position: absolute;
   left: 50%;
+  top: 20%;
   bottom: 20%;
+  font-size:3vh;
+  font-family: "Times New Roman";
+}
+
+.date {
+  position: relative;
+  top: 1vh;
+  font-size:2vh;
   font-family: "Times New Roman";
 }
