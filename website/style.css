@@ -50,3 +50,13 @@ body {
   font-size:2vh;
   font-family: "Times New Roman";
 }
+
+.footer {
+  position: fixed;
+  left: 1.5vw;
+  bottom: 0;
+  width: 100%;
+  font-size:2vh;
+  color: white;
+  text-align: left;
+}

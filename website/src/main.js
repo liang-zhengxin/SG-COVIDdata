@@ -30,7 +30,7 @@ function getValue(latestData) {
   const pop = 5685800
   const t = Object.keys(latestData.dailyVaxData)
   var completed = latestData.dailyVaxData[t].completed
-  date.textContent = "Updated: " + t + " Data: MOH Press Release"
+  date.textContent = "Updated: " + t
   var percent =(completed/pop)*100
   setValue(percent)
 }
