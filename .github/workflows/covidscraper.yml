@@ -29,9 +29,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
         
-      - name: execute py script # run mohscraper.py to get the latest data
+      - name: execute scraper py script # run mohscraper.py to get the latest data
         working-directory: ./scraper
         run: python3 mohscraper.py
+      
+      - name: execute api py script # run mohscraper.py to get the latest data
+        working-directory: ./scripts
+        run: python3 createLatest.py
         
       - name: commit files
         run: |
