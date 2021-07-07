@@ -21,7 +21,7 @@ const latestData = {
   }
 };
 
-fetch("liang-zhengxin.github.io/SG-COVIDdata/api/latest.json")
+fetch("api/latest.json")
   .then(response => response.json())
   .then(data=> {getValue(data)});
 
