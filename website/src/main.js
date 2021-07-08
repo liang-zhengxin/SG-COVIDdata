@@ -1,4 +1,3 @@
-const input = document.getElementById('value');
 const progressValue = document.querySelector('.Progressbar__value');
 const percent = document.querySelector('.percent');
 const date = document.querySelector('.date');
