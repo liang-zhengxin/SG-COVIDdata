@@ -32,5 +32,20 @@ function getValue(latestData) {
   date.textContent = "Updated: " + t
   var percent =(completed/pop)*100
   setValue(percent)
+  getMilestone(50-percent)
+}
+
+// Adding Text Milestones
+function getMilestone(percentageLeft) {
+  const milestone = document.createElement("h4");
+  if (percentageLeft <= 0) {
+    //  block of code to be executed if the condition is true
+    document.getElementById("target").innerHTML = "50% Vaccination Milestone Achieved";
+  } else {
+    var figure = document.createTextNode(String(Math.round(percentageLeft)) + "% remaining to achieve target");
+    milestone.appendChild(figure);
+    const element = document.querySelector('.Texttargets');
+    element.appendChild(milestone);
+  }
 }
 
