@@ -4,10 +4,43 @@ body {
   margin: auto;
   color: #fafafa;
   background-color: #202731;
-  top: 40%;
+  top: 35%;
   left: 10%;
   position: fixed;
   font-family: "Times New Roman";
+}
+.container{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.Texttargets{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: flex-end;
+  font-size:2vh;
+  animation: fadein 2s;
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
 }
 
 .Progressbar {
@@ -18,13 +51,25 @@ body {
   clip-path: inset(0 0 0 0 round 1000px);
 }
 
+.Progressbar b{
+  position: absolute;
+  height: 5vh;
+  width: 2px;
+  overflow: hidden;
+  top: -1px;
+  background: red;
+  left: 50%
+}
+
+
 .Progressbar__value {
   height: 5vh;
   transition: width 0.4s ease-in-out;
   border-radius: 1000px 0 0 1000px;
   background-color: #ff4c65;
   will-change: width;
-  animation-name: progressBar;
+  -webkit-animation: progressBar;
+  animation: progressBar;
   animation-iteration-count: 1;
   animation-duration: 2.5s;
 }
@@ -39,17 +84,19 @@ body {
   }
 }
 
-.percent {
-  position: relative;
-  left: 50%;
-  top: 20%;
-  bottom: 20%;
-  font-size:3vh;
-  font-family: "Times New Roman";
+@-webkit-keyframes progressBar { /* Safari and Chrome */
+  0% {
+    width: 1%;
+  }
+  
+  100% {
+    width: width;
+  }
 }
 
-.milestone {
-  position: absolute;
+
+.percent {
+  position: relative;
   left: 50%;
   top: 20%;
   bottom: 20%;
