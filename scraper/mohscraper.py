@@ -21,7 +21,7 @@ def get_MOH_feed():
 def get_latest_local_cases(data):
     for news in data:
         title = news['title']
-        if all(elem in title.lower().split()  for elem in 'Locally Transmitted COVID-19 Infection'.lower().split()) or all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
+        if all(elem in title.lower().split()  for elem in 'Locally Transmitted COVID-19 Infection'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
             description = news["description"]
             
             if all(elem in description.lower().split() for elem in "further updates will be shared via the MOH press release that will be issued".lower().split()):
@@ -43,7 +43,7 @@ def get_previous_data(data):
     # Get Data as far as RSS feed contains
     for news in data:
         title = news['title']
-        if all(elem in title.lower().split()  for elem in 'Locally Transmitted COVID-19 Infection'.lower().split()) or all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
+        if all(elem in title.lower().split()  for elem in 'Locally Transmitted COVID-19 Infection'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
             description = news["description"]
             
             if all(elem in description.lower().split() for elem in "further updates will be shared via the MOH press release that will be issued".lower().split()):
@@ -62,7 +62,7 @@ def get_previous_data(data):
 def get_latest_vax(data):
     for news in data:
         title = news['title']
-        if all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
+        if all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()):
             description = news["description"]
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
