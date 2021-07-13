@@ -31,8 +31,12 @@ def get_latest_local_cases(data):
             description = description[description.index("As"):]
             date = description[6:description.index("12pm")-2]
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
-            localCases = description[description.index("verified"):description.index("locally transmitted")]
-            localCases = "".join(char for char in localCases if char in "1234567890")
+            try:
+                localCases = description[description.index("verified"):description.index("locally transmitted")]
+                localCases = "".join(char for char in localCases if char in "1234567890")
+            except:
+                localCases = description[description.index("confirmed"):description.index("locally transmitted")]
+                localCases = "".join(char for char in localCases if char in "1234567890")
             if len(localCases) == 0:
                 localCases = 0
             break
