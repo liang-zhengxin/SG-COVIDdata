@@ -70,14 +70,19 @@ def get_latest_vax(data):
             description = news["description"]
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
-            
-            vaccineData = description[description.index("Progress of national vaccination programme"):description.index("full vaccination regimen.")]
+            try:
+                vaccineData = description[description.index("Progress of national vaccination programme"):description.index("full vaccination regimen.")]
+            except:
+                vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
             date = date[6:date.index("we")-2]
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             total = vaccineData[vaccineData.index("total number of doses administered"):vaccineData.index("covering")]
             first = vaccineData[vaccineData.index("covering"):vaccineData.index("individuals")]
-            completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("second dose")]
+            try:
+                completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("second dose")]
+            except:
+                completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("completed")]
             total = "".join(char for char in total if char in "1234567890")
             first = "".join(char for char in first if char in "1234567890")
             completed = "".join(char for char in completed if char in "1234567890")
