@@ -68,7 +68,6 @@ body {
   border-radius: 1000px 0 0 1000px;
   background-color: #ff4c65;
   will-change: width;
-  animation: progressBar;
   -webkit-animation: progressBar;
   animation-iteration-count: 1;
   animation-duration: 2.5s;
