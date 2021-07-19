@@ -11,7 +11,17 @@ This repository contains the following data:
 
 3. [Vaccination](data/dailyVaxData.json) (28 June 2021 onwards)
 
-4. [Missing Data](missing-data.json) which contains a list of dates that the data is missing from the repository. *updated manually*
+4. [Local Unlinked Cases](data/dailyLocalCases.json) (29 June 2021 onwards) *updated manually*
+
+5. [Missing Data](missing-data.json) which contains a list of dates that the data is missing from the repository. *updated manually*
+
+*Note: Unlink cases may become link as contact tracing continues, however this data only tracks the number of unlink cases reported on that day's press release.*
+
+# Quick Glance Dashboard
+
+This data is presented in a simple format on this [website](liang-zhengxin.github.io/SG-COVIDdata). It offers an animated progress bar showing Singapore's vaccination progress which tracks the number of fully vaccinated individuals as a percentage of the population.
+
+A [graph](liang-zhengxin.github.io/SG-COVIDdata/graph) showing the trend of locally transmitted cases is avaliable.
 
 
 # Data Source
