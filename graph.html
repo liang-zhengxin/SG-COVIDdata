@@ -7,16 +7,29 @@
     background-color: #202731;
     font-family: "Times New Roman";
     }
+    .footer {
+    position: fixed;
+    left: 1.5vw;
+    bottom: 0;
+    width: 100%;
+    font-size:2vh;
+    color: white;
+    text-align: left;
+    }
 </style>
 <body>
 <h1>Locally Transmitted Cases</h1>
 <canvas id="myChart" style="width:8vw;height:5vh;position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)"></canvas>
 
+<div class="footer">
+    <p>Source: <a href="https://www.moh.gov.sg/news-highlights" target="_blank" rel="noopener noreferrer" style="color:whitesmoke">MOH Press Release</a>&nbsp;&nbsp;<a href="./index" target="_self" rel="noopener noreferrer" style="color:whitesmoke">Vaccination Data</a></p>
+</div>
 <script>
+
+
 fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalUnlinkCases.json")
     .then(response => response.json())
     .then(data=> {addUnlink(data)});
-
 fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalCases.json")
     .then(response => response.json())
     .then(data=> {show(data)});
