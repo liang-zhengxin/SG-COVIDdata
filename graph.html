@@ -13,18 +13,43 @@
 <canvas id="myChart" style="width:8vw;height:5vh;position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)"></canvas>
 
 <script>
+fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalUnlinkCases.json")
+    .then(response => response.json())
+    .then(data=> {addUnlink(data)});
 
 fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalCases.json")
     .then(response => response.json())
     .then(data=> {show(data)});
 
-function show(data) {
+
+
+function addUnlink(data) {
     var xValues = []
     var yValues = []
     for (const [key, value] of Object.entries(data)) {
         xValues.push(key)
         yValues.push(value)
         console.log(`${key}: ${value}`);
+    }
+    console.log(yValues.length)
+    if (yValues.length < 32) {
+        var l = yValues.length
+        for (let i = 0; i < (32 - l); i++) {
+            yValues.push(null)
+        }
+    }
+    console.log(yValues)
+
+    globalThis.UnlinkxValues30 = xValues.slice(0,31).reverse()
+    globalThis.UnlinkyValues30 = yValues.slice(0,31).reverse()
+}
+
+function show(data) {
+    var xValues = []
+    var yValues = []
+    for (const [key, value] of Object.entries(data)) {
+        xValues.push(key)
+        yValues.push(value);
     }
 
     var xValues30 = xValues.slice(0,31).reverse()
@@ -40,6 +65,14 @@ function show(data) {
             backgroundColor: "rgba(255,0,0,1.0)",
             borderColor: "rgba(255,0,100,0.8)",
             data: yValues30
+            },
+            {
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(255,255,0,1.0)",
+            borderColor: "rgba(255,255,100,0.8)",
+            spanGaps: true,
+            data: UnlinkyValues30   
             }]
         },
         options: {
