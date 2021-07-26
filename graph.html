@@ -45,12 +45,7 @@ function addUnlink(data) {
         console.log(`${key}: ${value}`);
     }
     console.log(yValues.length)
-    if (yValues.length < 32) {
-        var l = yValues.length
-        for (let i = 0; i < (32 - l); i++) {
-            yValues.push(null)
-        }
-    }
+
     console.log(yValues)
 
     globalThis.UnlinkxValues30 = xValues.slice(0,31).reverse()
