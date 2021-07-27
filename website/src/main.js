@@ -7,10 +7,24 @@ function setValue(value) {
   percent.textContent = String(Math.round(value)) + "%"
 }
 
+const latestData = {
+  "dailyLocalCases": {
+      "06-07-2021": 2
+  },
+  "dailyVaxData": {
+      "05-07-2021": {
+          "total": 5858571,
+          "first": 3670862,
+          "completed": 2187709
+      }
+  }
+};
+
 fetch("api/latest.json")
   .then(response => response.json())
   .then(data=> {getValue(data)});
 
+// getValue(latestData)
 function getValue(latestData) {
   const pop = 5685800
   const t = Object.keys(latestData.dailyVaxData)
@@ -34,3 +48,4 @@ function getMilestone(percentageLeft) {
     element.appendChild(milestone);
   }
 }
+
