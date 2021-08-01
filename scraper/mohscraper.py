@@ -75,11 +75,21 @@ def get_latest_vax(data):
             except:
                 vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
-            date = date[6:date.index("we")-2]
-            date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
-            total = vaccineData[vaccineData.index("total number of doses administered"):vaccineData.index("covering")]
+            try:
+                date1 = date[6:date.index("we")-2]
+                date = datetime.datetime.strptime(date1, "%d %B %Y").strftime("%d-%m-%Y")
+            except:
+                date2 = date[6:date.index(",")]
+                date = datetime.datetime.strptime(date2, "%d %B %Y").strftime("%d-%m-%Y")
+            try:
+                total = vaccineData[vaccineData.index("we have administered a total of"):vaccineData.index("covering")]
+                total = total[:total.index("doses")]
+            except:
+                total = vaccineData[vaccineData.index("total number of doses administered"):vaccineData.index("covering")]
             first = vaccineData[vaccineData.index("covering"):vaccineData.index("individuals")]
             try:
+                completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("individuals having completed")]
+            except ValueError:
                 completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("second dose")]
             except:
                 completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("completed")]
