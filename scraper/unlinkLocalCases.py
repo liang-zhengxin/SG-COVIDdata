@@ -37,6 +37,7 @@ def get_previous_data(data):
             try:
                 localunlink = description[:description.index("are currently unlinked.")][-5:]
             except:
+                break # Temporary Fix to Get Latest Data. Also to alert when broken.
                 try:
                     check = input(f"check {date} value: ")
                 except KeyboardInterrupt:
