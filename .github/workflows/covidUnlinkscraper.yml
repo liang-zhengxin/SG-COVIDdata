@@ -38,7 +38,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           git add -A
-          git commit -m "daily update data"
+          git commit -m "daily update unlink data"
           git push
       
       
