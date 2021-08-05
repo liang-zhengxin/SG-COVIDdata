@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<style>
+    body {
+    color: #fafafa;
+    background-color: #202731;
+    font-family: "Times New Roman";
+    }
+    .footer {
+    position: fixed;
+    left: 1.5vw;
+    bottom: 0;
+    width: 100%;
+    font-size:2vh;
+    color: white;
+    text-align: left;
+    }
+</style>
+<body>
+<h1>Locally Transmitted Cases (Demo Page)</h1>
+<h5 style="color: red">DISCLAIMER: UNLINK DATA MAYBE WRONG DUE TO NATURE OF DATA UPDATE. USE <a href="./graph" target="_self" rel="noopener noreferrer" style="color:lightblue  ">THIS</a> INSTEAD</h5>
+<canvas id="myChart" style="width:8vw;height:5vh;position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)"></canvas>
+
+<div class="footer">
+    <p>Source: <a href="https://www.moh.gov.sg/news-highlights" target="_blank" rel="noopener noreferrer" style="color:whitesmoke">MOH Press Release</a>&nbsp;&nbsp;<a href="./index" target="_self" rel="noopener noreferrer" style="color:whitesmoke">Vaccination Data</a></p>
+</div>
+<script>
+
+
+fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalUnlinkCases.json")
+    .then(response => response.json())
+    .then(data=> {addUnlink(data)});
+fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalCases.json")
+    .then(response => response.json())
+    .then(data=> {show(data)});
+
+
+
+function addUnlink(data) {
+    var xValues = []
+    var yValues = []
+    for (const [key, value] of Object.entries(data)) {
+        xValues.push(key)
+        yValues.push(value)
+        console.log(`${key}: ${value}`);
+    }
+    console.log(yValues.length)
+
+    console.log(yValues)
+
+    globalThis.UnlinkxValues30 = xValues.slice(0,31).reverse()
+    globalThis.UnlinkyValues30 = yValues.slice(0,31).reverse()
+}
+
+function show(data) {
+    var xValues = []
+    var yValues = []
+    for (const [key, value] of Object.entries(data)) {
+        xValues.push(key)
+        yValues.push(value);
+    }
+
+    var xValues30 = xValues.slice(0,31).reverse()
+    var yValues30 = yValues.slice(0,31).reverse()
+
+    new Chart("myChart", {
+        type: "line",
+        data: {
+            labels: xValues30,
+            datasets: [{
+            label: "Total",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(255,0,0,1.0)",
+            borderColor: "rgba(255,0,100,0.8)",
+            data: yValues30
+            },
+            {
+            label: "Unlinked",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(255,255,0,1.0)",
+            borderColor: "rgba(255,255,100,0.8)",
+            spanGaps: true,
+            data: UnlinkyValues30   
+            }]
+        },
+        options: {
+            legend: {display: true,position:'bottom',align:"start"},
+            scales: {
+            yAxes: [{ticks: {min: 0, max:Math.max(...yValues30)+10, fontColor: "white"}}]
+            }
+        }
+        });
+}
+</script>
+
+</body>
+</html>
+
+
