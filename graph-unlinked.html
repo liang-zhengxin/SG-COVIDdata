@@ -19,21 +19,20 @@
 </style>
 <body>
 <h1>Locally Transmitted Cases (Demo Page)</h1>
-<h5 style="color: red">DISCLAIMER: UNLINK DATA MAYBE WRONG DUE TO NATURE OF DATA UPDATE. USE <a href="./graph" target="_self" rel="noopener noreferrer" style="color:lightblue  ">THIS</a> INSTEAD</h5>
+<h5 style="color: red">DISCLAIMER: UNLINK DATA MAYBE WRONG DUE TO NATURE OF DATA UPDATE. USE <a href="./graph" target="_self" rel="noopener noreferrer" style="color:lightblue  ">THIS</a> INSTEAD <div class="date" style="color:white"></div></h5>
+
 <canvas id="myChart" style="width:8vw;height:5vh;position:fixed;top: 50%;left: 50%;transform: translate(-50%, -50%)"></canvas>
 
 <div class="footer">
     <p>Source: <a href="https://www.moh.gov.sg/news-highlights" target="_blank" rel="noopener noreferrer" style="color:whitesmoke">MOH Press Release</a>&nbsp;&nbsp;<a href="./index" target="_self" rel="noopener noreferrer" style="color:whitesmoke">Vaccination Data</a></p>
 </div>
 <script>
-
+const date = document.querySelector('.date');
 
 fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalUnlinkCases.json")
     .then(response => response.json())
     .then(data=> {addUnlink(data)});
-fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalCases.json")
-    .then(response => response.json())
-    .then(data=> {show(data)});
+
 
 
 
@@ -49,8 +48,15 @@ function addUnlink(data) {
 
     console.log(yValues)
 
+    const t = Object.keys(data)[0]
+    date.textContent = "Updated: " + t
+    
     globalThis.UnlinkxValues30 = xValues.slice(0,31).reverse()
     globalThis.UnlinkyValues30 = yValues.slice(0,31).reverse()
+
+    fetch("https://liang-zhengxin.github.io/SG-COVIDdata/data/dailyLocalCases.json")
+    .then(response => response.json())
+    .then(data=> {show(data)});
 }
 
 function show(data) {
