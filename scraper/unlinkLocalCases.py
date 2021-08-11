@@ -32,8 +32,17 @@ def get_previous_data(data):
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
             description = description[description.index("As"):]
+            try:
+                date = description[description.index("MINISTRY OF HEALTH")+18:]
+                date = date[:date.index("National")]
+                date = date[:date.index("2021")+4]
+                date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
+            except:
+                break
+            """
             date = description[6:description.index("12pm")-2]
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
+            """
             try:
                 localunlink = description[:description.index("are currently unlinked.")][-5:]
             except:
