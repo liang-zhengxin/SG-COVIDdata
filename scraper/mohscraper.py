@@ -29,14 +29,24 @@ def get_latest_local_cases(data):
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
             description = description[description.index("As"):]
-            date = description[6:description.index("12pm")-2]
+            """
+            try:
+                date = description[6:description.index("12pm")-2]
+            except:
+                date = description[6:description.index(",")]
+            """
+            date = description[description.index("MINISTRY OF HEALTH")+18:description.index("Based on National")][:-4]
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
+            localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
+            localCases = "".join(char for char in localCases if char in "1234567890")
+            """
             try:
                 localCases = description[description.index("verified"):description.index("locally transmitted")]
                 localCases = "".join(char for char in localCases if char in "1234567890")
             except:
                 localCases = description[description.index("confirmed"):description.index("locally transmitted")]
                 localCases = "".join(char for char in localCases if char in "1234567890")
+            """
             if len(localCases) == 0:
                 localCases = 0
             break
@@ -70,10 +80,13 @@ def get_latest_vax(data):
             description = news["description"]
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
+            """
             try:
                 vaccineData = description[description.index("Progress of national vaccination programme"):description.index("full vaccination regimen.")]
             except:
                 vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
+            """
+            vaccineData = description[description.index("Update on vaccination progress"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
             try:
                 date1 = date[6:date.index("we")-2]
