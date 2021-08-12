@@ -35,7 +35,7 @@ def get_previous_data(data):
             try:
                 date = description[description.index("MINISTRY OF HEALTH")+18:]
                 date = date[:date.index("National")]
-                date = date[:date.index("2021")+4]
+                date = date[:date.index("2021")+4].strip()
                 date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             except:
                 break

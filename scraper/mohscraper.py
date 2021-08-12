@@ -36,6 +36,7 @@ def get_latest_local_cases(data):
                 date = description[6:description.index(",")]
             """
             date = description[description.index("MINISTRY OF HEALTH")+18:description.index("Based on National")][:-4]
+            date = date[:date.index("2021")+4].strip()
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
             localCases = "".join(char for char in localCases if char in "1234567890")
