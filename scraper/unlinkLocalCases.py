@@ -38,11 +38,12 @@ def get_previous_data(data):
                 date = date[:date.index("2021")+4].strip()
                 date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             except:
-                break
-            """
-            date = description[6:description.index("12pm")-2]
-            date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
-            """
+                try:
+                    date = description[6:description.index("12pm")-2]
+                    date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
+                except:
+                    break
+
             try:
                 localunlink = description[:description.index("are currently unlinked.")][-5:]
             except:
