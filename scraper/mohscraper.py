@@ -28,17 +28,18 @@ def get_latest_local_cases(data):
                 continue
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
+            description = description[description.index("As")+10:]
             description = description[description.index("As"):]
-            
             try:
                 date = description[6:description.index("12pm")-2]
             except:
                 date = description[6:description.index(",")]
-
             #date = description[description.index("MINISTRY OF HEALTH")+18:description.index("Based on National")]
             #date = date[:date.index("2021")+4].strip()
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
-            localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
+            #localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
+            localCases = description[description.index("Locally transmitted COVID-19 cases"):]
+            localCases = localCases[localCases.index("comprising"):localCases.index("local cases")]
             localCases = "".join(char for char in localCases if char in "1234567890")
             """
             try:
@@ -96,7 +97,7 @@ def get_latest_vax(data):
                 date2 = date[6:date.index(",")]
                 date = datetime.datetime.strptime(date2, "%d %B %Y").strftime("%d-%m-%Y")
             try:
-                total = vaccineData[vaccineData.index("we have administered a total of"):vaccineData.index("covering")]
+                total = vaccineData[vaccineData.index("administered a total of"):vaccineData.index("covering")]
                 total = total[:total.index("doses")]
             except:
                 total = vaccineData[vaccineData.index("total number of doses administered"):vaccineData.index("covering")]
