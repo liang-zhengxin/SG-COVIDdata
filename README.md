@@ -11,7 +11,7 @@ This repository contains the following data:
 
 3. [Vaccination](data/dailyVaxData.json) (28 June 2021 onwards)
 
-4. [Local Unlinked Cases](data/dailyLocalUnlinkCases.json) (29 June 2021 onwards) *updated manually*
+4. [Local Unlinked Cases](data/dailyLocalUnlinkCases.json) (29 June 2021 to 7 September 2021) 
 
 5. [Missing Data](missing-data.json) which contains a list of dates that the data is missing from the repository. *updated manually*
 
