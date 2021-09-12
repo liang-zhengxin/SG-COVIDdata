@@ -39,7 +39,9 @@ def get_latest_local_cases(data):
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             #localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
             localCases = description[description.index("Locally transmitted COVID-19 cases"):]
-            localCases = localCases[localCases.index("comprising"):localCases.index("local cases")]
+            localCases0 = localCases[localCases.index("comprising"):localCases.index("local cases")]
+            localCases1 = localCases[localCases.index("comprising"):localCases.index("community cases")]
+            localCases = localCases0 if localCases0 <= localCases1 else localCases1 #Local Cases Test due to variation of wording. Test for len of string only.
             localCases = "".join(char for char in localCases if char in "1234567890")
             """
             try:
