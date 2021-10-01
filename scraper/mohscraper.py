@@ -21,7 +21,8 @@ def get_MOH_feed():
 def get_latest_local_cases(data):
     for news in data:
         title = news['title']
-        if all(elem in title.lower().split()  for elem in 'Locally Transmitted COVID-19 Infection'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()):
+        if all(elem in title.lower().split()  for elem in 'Locally Transmitted COVID-19 Infection'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()) \
+            or all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'UPDATE ON LOCAL COVID-19'.lower().split()):
             description = news["description"]
             
             if all(elem in description.lower().split() for elem in "further updates will be shared via the MOH press release that will be issued".lower().split()):
@@ -80,7 +81,8 @@ def get_previous_data(data):
 def get_latest_vax(data):
     for news in data:
         title = news['title']
-        if all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()):
+        if all(elem in title.lower().split()  for elem in 'Update on Local COVID-19 Situation'.lower().split()) or all(elem in title.lower().split()  for elem in 'Updates on Local COVID-19 Situation'.lower().split()) \
+            or all(elem in title.lower().split()  for elem in 'UPDATE ON LOCAL COVID-19'.lower().split()):
             description = news["description"]
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
@@ -99,11 +101,11 @@ def get_latest_vax(data):
                 date2 = date[6:date.index(",")]
                 date = datetime.datetime.strptime(date2, "%d %B %Y").strftime("%d-%m-%Y")
             try:
-                total = vaccineData[vaccineData.index("administered a total of"):vaccineData.index("covering")]
+                total = vaccineData[vaccineData.index("administered a total of"):vaccineData.index("national vaccination programme")]
                 total = total[:total.index("doses")]
             except:
                 total = vaccineData[vaccineData.index("total number of doses administered"):vaccineData.index("covering")]
-            first = vaccineData[vaccineData.index("covering"):vaccineData.index("individuals")]
+            first = vaccineData[vaccineData.index("national vaccination programme"):vaccineData.index("individuals")]
             try:
                 completed = vaccineData[vaccineData.index("individuals"):vaccineData.index("individuals having completed")]
             except ValueError:
