@@ -39,10 +39,13 @@ def get_latest_local_cases(data):
             #date = date[:date.index("2021")+4].strip()
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             #localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
-            localCases = description[description.index("Locally transmitted COVID-19 cases"):]
-            localCases0 = localCases[localCases.index("comprising"):localCases.index("local cases")]
-            localCases1 = localCases[localCases.index("comprising"):localCases.index("community cases")]
-            localCases = localCases0 if localCases0 <= localCases1 else localCases1 #Local Cases Test due to variation of wording. Test for len of string only.
+            try:
+                localCases = description[description.index("Locally transmitted COVID-19 cases"):]
+            except:
+                localCases = description[description.index("Summary of trends for local cases"):]
+            #localCases0 = localCases[localCases.index("comprising"):localCases.index("local cases")]
+            localCases = localCases[localCases.index("comprising"):localCases.index("community cases")]
+            #localCases = localCases0 if localCases0 <= localCases1 else localCases1 #Local Cases Test due to variation of wording. Test for len of string only.
             localCases = "".join(char for char in localCases if char in "1234567890")
             """
             try:
@@ -92,7 +95,10 @@ def get_latest_vax(data):
             except:
                 vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
             """
-            vaccineData = description[description.index("Update on vaccination progress"):description.index("full vaccination regimen")]
+            try:
+                vaccineData = description[description.index("Vaccination progress"):description.index("full vaccination regimen")]
+            except:
+                vaccineData = description[description.index("Update on vaccination progress"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
             try:
                 date1 = date[6:date.index("we")-2]
