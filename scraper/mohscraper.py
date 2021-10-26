@@ -96,7 +96,7 @@ def get_latest_vax(data):
                 vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
             """
             try:
-                vaccineData = description[description.index("Vaccination progress"):description.index("full vaccination regimen")]
+                vaccineData = description[description.index("Vaccination"):description.index("full vaccination regimen")]
             except:
                 vaccineData = description[description.index("Update on vaccination progress"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
