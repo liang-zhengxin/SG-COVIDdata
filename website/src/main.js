@@ -14,7 +14,7 @@ fetch("api/latest.json")
 function getValue(latestData) {
   const pop = 5685800
   const t = Object.keys(latestData.dailyVaxDataPercent)
-  var completed = latestData.dailyVaxData[t].completed
+  var completed = latestData.dailyVaxDataPercent[t].completed
   date.textContent = "Updated: " + t
   // var percent =(completed/pop)*100
   var percent = completed
