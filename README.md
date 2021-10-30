@@ -9,11 +9,15 @@ This repository contains the following data:
 
 2. [Locally Transmitted Cases](data/dailyLocalCases-pre1jun21.json) (5 October 2020 to 30 May 2021)
 
-3. [Vaccination](data/dailyVaxData.json) (28 June 2021 onwards)
+3. [Vaccination](data/dailyVaxData.json) (28 June 2021 to 27 October 2021)
 
-4. [Local Unlinked Cases](data/dailyLocalUnlinkCases.json) (29 June 2021 to 7 September 2021) 
+4. [Vaccination (Percentages)](data/dailyVaxDataPercent.json) (28 October 2021 onwards)
 
-5. [Missing Data](missing-data.json) which contains a list of dates that the data is missing from the repository. *updated manually*
+
+5. [Local Unlinked Cases](data/dailyLocalUnlinkCases.json) (29 June 2021 to 7 September 2021) 
+
+
+6. [Missing Data](missing-data.json) which contains a list of dates that the data is missing from the repository. *updated manually*
 
 *Note: Unlink cases may become link as contact tracing continues, however this data only tracks the number of unlink cases reported on that day's press release.*
 

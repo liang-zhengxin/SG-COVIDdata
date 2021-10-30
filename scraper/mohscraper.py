@@ -29,20 +29,24 @@ def get_latest_local_cases(data):
                 continue
             soup = BeautifulSoup(description, "html.parser")
             description = soup.get_text()
-            description = description[description.index("As")+10:]
-            description = description[description.index("As"):]
+            # GET DATE AND CASES
+            description = description[description.index("Inflow and Outflow of Cases"):]
+            date = description[description.index("As of"):]
+            #description = description[description.index("As")+10:]
+            #description = description[description.index("As"):]
             try:
-                date = description[6:description.index("12pm")-2]
+                date = date[6:date.index("12pm")-2]
             except:
-                date = description[6:description.index(",")]
+                date = date[6:date.index(",")]
             #date = description[description.index("MINISTRY OF HEALTH")+18:description.index("Based on National")]
             #date = date[:date.index("2021")+4].strip()
             date = datetime.datetime.strptime(date, "%d %B %Y").strftime("%d-%m-%Y")
             #localCases = description[description.index("Locally transmitted COVID-19 cases")+35:description.index("locally transmitted COVID-19 infection today")]
             try:
-                localCases = description[description.index("Locally transmitted COVID-19 cases"):]
+                localCases = description[description.index("detected"):]
             except:
                 localCases = description[description.index("Summary of trends for local cases"):]
+
             #localCases0 = localCases[localCases.index("comprising"):localCases.index("local cases")]
             localCases = localCases[localCases.index("comprising"):localCases.index("community cases")]
             #localCases = localCases0 if localCases0 <= localCases1 else localCases1 #Local Cases Test due to variation of wording. Test for len of string only.
@@ -96,7 +100,7 @@ def get_latest_vax(data):
                 vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
             """
             try:
-                vaccineData = description[description.index("Vaccination"):description.index("full vaccination regimen")]
+                vaccineData = description[description.index("Vaccination"):description.index("booster shots")+20]
             except:
                 vaccineData = description[description.index("Update on vaccination progress"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
@@ -106,6 +110,13 @@ def get_latest_vax(data):
             except:
                 date2 = date[6:date.index(",")]
                 date = datetime.datetime.strptime(date2, "%d %B %Y").strftime("%d-%m-%Y")
+
+            completed = vaccineData[vaccineData.index(","):vaccineData.index("completed")]
+            first = vaccineData[vaccineData.index("vaccines"):vaccineData.index("least one")]
+            booster = vaccineData[vaccineData.index("least one"):vaccineData.index("booster shots")]
+
+            """
+            #  OLD FORMAT
             try:
                 total = vaccineData[vaccineData.index("administered a total of"):vaccineData.index("national vaccination programme")]
                 total = total[:total.index("doses")]
@@ -121,15 +132,20 @@ def get_latest_vax(data):
             total = "".join(char for char in total if char in "1234567890")
             first = "".join(char for char in first if char in "1234567890")
             completed = "".join(char for char in completed if char in "1234567890")
-            entry = {"total":int(total), "first":int(first), "completed":int(completed)}
+            """
+            completed = "".join(char for char in completed if char in "1234567890")
+            first = "".join(char for char in first if char in "1234567890")
+            booster = "".join(char for char in booster if char in "1234567890")
+            entry = {"completed":int(completed), "first":int(first), "booster":int(booster)}
             break
+
     return date , entry
 
 def load():
     with open("../data/dailyLocalCases.json") as file:
         dailyLocalCases = json.load(file)
 
-    with open("../data/dailyVaxData.json") as file:
+    with open("../data/dailyVaxDataPercent.json") as file:
         dailyVaxData = json.load(file)
     return dailyLocalCases , dailyVaxData
 
@@ -137,7 +153,7 @@ def unload(dailyLocalCases, dailyVaxData):
     with open("../data/dailyLocalCases.json", "w") as file:
         json.dump(dailyLocalCases, file, indent=4)
     
-    with open("../data/dailyVaxData.json", "w") as file:
+    with open("../data/dailyVaxDataPercent.json", "w") as file:
         json.dump(dailyVaxData, file, indent=4)
 
 

@@ -13,14 +13,16 @@ fetch("api/latest.json")
 
 function getValue(latestData) {
   const pop = 5685800
-  const t = Object.keys(latestData.dailyVaxData)
+  const t = Object.keys(latestData.dailyVaxDataPercent)
   var completed = latestData.dailyVaxData[t].completed
   date.textContent = "Updated: " + t
-  var percent =(completed/pop)*100
+  // var percent =(completed/pop)*100
+  var percent = completed
   setValue(percent)
-  getMilestone(66-percent)
+  // getMilestone(66-percent)
 }
 
+/*
 // Adding Text Milestones
 function getMilestone(percentageLeft) {
   const milestone = document.createElement("h4");
@@ -34,3 +36,4 @@ function getMilestone(percentageLeft) {
     element.appendChild(milestone);
   }
 }
+*/

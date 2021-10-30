@@ -9,8 +9,8 @@ import json
 with open("../data/dailyLocalCases.json") as file:
     dailyLocalCases = json.load(file)
 
-with open("../data/dailyVaxData.json") as file:
-    dailyVaxData = json.load(file)
+with open("../data/dailyVaxDataPercent.json") as file:
+    dailyVaxDataPercent = json.load(file)
 
 # Global Variable
 
@@ -21,8 +21,8 @@ last = list(dailyLocalCases.items())[0]
 LATEST["dailyLocalCases"] = {last[0]: last[1]}
 
 # Load Latest Vaccination Data
-last = list(dailyVaxData.items())[0]
-LATEST["dailyVaxData"] = {last[0]: last[1]}
+last = list(dailyVaxDataPercent.items())[0]
+LATEST["dailyVaxDataPercent"] = {last[0]: last[1]}
 
 # Unload Latest into API
 with open("../api/latest.json", "w") as file:
