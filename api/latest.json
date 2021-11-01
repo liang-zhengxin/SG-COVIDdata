@@ -1,12 +1,12 @@
 {
     "dailyLocalCases": {
-        "31-10-2021": 2745
+        "01-11-2021": 2189
     },
     "dailyVaxDataPercent": {
-        "30-10-2021": {
+        "31-10-2021": {
             "completed": 84,
             "first": 85,
-            "booster": 15
+            "booster": 16
         }
     }
 }
