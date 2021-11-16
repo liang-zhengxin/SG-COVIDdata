@@ -100,7 +100,8 @@ def get_latest_vax(data):
                 vaccineData = description[description.index("of national vaccination"):description.index("full vaccination regimen")]
             """
             try:
-                vaccineData = description[description.index("Vaccination"):description.index("booster shots")+20]
+                vaccineData = description[description.index("Vaccination"):]
+                vaccineData = vaccineData[:vaccineData.index("booster shots")+20]
             except:
                 vaccineData = description[description.index("Update on vaccination progress"):description.index("full vaccination regimen")]
             date = vaccineData[vaccineData.index("As"):]
@@ -110,9 +111,9 @@ def get_latest_vax(data):
             except:
                 date2 = date[6:date.index(",")]
                 date = datetime.datetime.strptime(date2, "%d %B %Y").strftime("%d-%m-%Y")
-
-            completed = vaccineData[vaccineData.index(","):vaccineData.index("completed")]
-            first = vaccineData[vaccineData.index("vaccines"):vaccineData.index("least one")]
+            vaccineData = vaccineData[vaccineData.index("total population"):]
+            completed = vaccineData[:vaccineData.index("completed")]
+            first = vaccineData[vaccineData.index("least one")-20:vaccineData.index("least one")]
             booster = vaccineData[vaccineData.index("least one"):vaccineData.index("booster shots")]
 
             """
