@@ -111,8 +111,8 @@ def get_latest_vax(data):
             except:
                 date2 = date[6:date.index(",")]
                 date = datetime.datetime.strptime(date2, "%d %B %Y").strftime("%d-%m-%Y")
-            vaccineData = vaccineData[vaccineData.index("total population"):]
-            completed = vaccineData[:vaccineData.index("completed")]
+            vaccineData = vaccineData[vaccineData.index("eligible population"):]
+            completed = vaccineData[:vaccineData.index("total population")]
             first = vaccineData[vaccineData.index("least one")-20:vaccineData.index("least one")]
             booster = vaccineData[vaccineData.index("least one"):vaccineData.index("booster shots")]
 
